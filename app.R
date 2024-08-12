@@ -25,11 +25,15 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   story <- reactive({
-    req(input$noun1)
-    req(input$verb)
-    req(input$adjective)
-    req(input$adverb)
-    generate_story(input$noun1, input$verb, input$adjective, input$adverb)
+    noun <- input$noun1
+    verb <- input$verb
+    adj <- input$adjective
+    adv <- input$adverb
+    if (!isTruthy(noun) | !isTruthy(verb) | !isTruthy(adj) | !isTruthy(adv)) {
+      "(input terms for madlib)"
+    } else {
+      generate_story(noun, verb, adj, adv)
+    }
   })
   output$story <- renderText({
     story()
