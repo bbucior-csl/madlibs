@@ -29,6 +29,10 @@ server <- function(input, output) {
     verb <- input$verb
     adj <- input$adjective
     adv <- input$adverb
+    cat(
+      glue::glue("Attempting to write story about {noun}, {verb}, {adj}, and {adv}."),
+      file = stderr()
+    )
     if (!isTruthy(noun) | !isTruthy(verb) | !isTruthy(adj) | !isTruthy(adv)) {
       "(input terms for madlib)"
     } else {
